@@ -26,5 +26,20 @@ module Katello
       assert_equal @facts[fact1], @host.facts[fact1.gsub('.', '::')]
       refute_nil @host.operatingsystem
     end
+
+    def test_import_bonded_nic
+      @facts = {
+        'net.interface.bond0.mac_address' => '52:54:00:A7:41:32',
+        'net.interface.bond0.ipv4_address_list' => '192.168.121.165',
+        'net.interface.eth0.mac_address' => '52:54:00:A7:41:32',
+        'net.interface.eth0.permament_mac_address' => '52:54:00:A7:41:32',
+        'net.interface.eth1.mac_address' => '00:00:00:00:00:12',
+        'net.interface.eth1.mac_address' => '00:00:00:00:00:12',
+      }
+
+      Host::SubscriptionFacet.update_facts(@host, @facts)
+
+      assert @host.save
+    end
   end
 end

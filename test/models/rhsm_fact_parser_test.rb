@@ -14,6 +14,7 @@ module Katello
         'net.interface.eth3.mac_address' => '00:00:00:00:00:14'
       }
     end
+
     let(:parser) { RhsmFactParser.new(@facts) }
 
     def test_virtual_interfaces
@@ -92,6 +93,24 @@ module Katello
       @facts['uname.machine'] = 'i686'
 
       assert 'i386', parser.architecture.name
+    end
+
+    def test_bonded_nic_facts
+      @facts = {
+        'net.interface.bond0.mac_address' => '52:54:00:A7:41:32',
+        'net.interface.bond0.ipv4_address_list' => '192.168.121.165',
+        'net.interface.eth0.mac_address' => '52:54:00:A7:41:32',
+        'net.interface.eth0.permament_mac_address' => '52:54:00:A7:41:32',
+        'net.interface.eth1.mac_address' => '00:00:00:00:00:12',
+        'net.interface.eth1.mac_address' => '00:00:00:00:00:12',
+      }
+
+      interfaces = parser.get_interfaces
+      assert_includes interfaces, 'bond0'
+      refute_includes interfaces, 'ethnone'
+      assert_includes interfaces, 'eth0'
+      assert_includes interfaces, 'eth1'
+      assert_equal 3, interfaces.count
     end
   end
 end
