@@ -34,7 +34,7 @@ module Katello
         'net.interface.eth0.mac_address' => '52:54:00:A7:41:32',
         'net.interface.eth0.permament_mac_address' => '52:54:00:A7:41:32',
         'net.interface.eth1.mac_address' => '00:00:00:00:00:12',
-        'net.interface.eth1.mac_address' => '00:00:00:00:00:12',
+        'net.interface.eth1.permament_mac_address' => '00:00:00:00:00:12'
       }
 
       Host::SubscriptionFacet.update_facts(@host, @facts)
