@@ -8,7 +8,7 @@ describe('Controller: ContentViewDetailsController', function() {
             translate = $injector.get('translateMock'),
             RepositoryTypesService = {};
 
-        newContentView = {id: 7};
+        newContentView = {id: 7, errors: []};
         ContentView = $injector.get('MockResource').$new();
         ContentView.copy = function(params, success){success(newContentView)};
 
