@@ -10,13 +10,8 @@ class Setting::Content < Setting
     Hash[parameters.map { |p| [p, p] }]
   end
 
-  def self.deprecate_background(policies_hash)
-    policies_hash['background'] = 'background (deprecated)'
-    policies_hash
-  end
-
   def self.default_settings
-    download_policies = proc { deprecate_background(hashify_parameters(::Runcible::Models::YumImporter::DOWNLOAD_POLICIES)) }
+    download_policies = proc { hashify_parameters(::Runcible::Models::YumImporter::DOWNLOAD_POLICIES) }
 
     proxy_download_policies = proc { deprecate_background(hashify_parameters(::SmartProxy::DOWNLOAD_POLICIES)) }
     dependency_solving_options = proc { hashify_parameters(['conservative', 'greedy']) }
