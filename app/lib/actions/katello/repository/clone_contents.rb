@@ -15,7 +15,7 @@ module Actions
 
           sequence do
             if copy_contents
-              plan_pulp_action([Pulp3::Orchestration::Repository::CopyAllUnits, Pulp::Orchestration::Repository::CopyAllUnits],
+              plan_pulp_action([Pulp3::Orchestration::Repository::CopyAllUnits],
                           new_repository,
                           SmartProxy.pulp_primary,
                           source_repositories,

@@ -20,8 +20,7 @@ module Actions
             fail repository.errors.messages.values.join("\n")
           end
 
-          plan_pulp_action([Actions::Pulp::Orchestration::Repository::Delete,
-                            Actions::Pulp3::Orchestration::Repository::Delete],
+          plan_pulp_action([Actions::Pulp3::Orchestration::Repository::Delete],
                            repository,
                            SmartProxy.pulp_primary)
 
